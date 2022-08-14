@@ -25,16 +25,21 @@ public class OrderView {
             choice = input.nextLine();
             switch (choice) {
                 case "1":
+                    productService.print();
                     addOrder();
+                    Menu.getMenuYesNo();
                     break;
                 case "2":
                     removerOrderItem();
+                    Menu.getMenuYesNo();
                     break;
                 case "3":
-                   printItemOrder();
+                    printItemOrder();
+                    Menu.getMenuYesNo();
                     break;
                 case "4":
                     printAllOrderView();
+                    Menu.getMenuYesNo();
                     break;
                 case "0":
                     Menu.getMenuYesNo();
@@ -48,7 +53,7 @@ public class OrderView {
 
     public void addOrder() {
         boolean flag;
-        int amount = 0;
+        Integer amount = null;
         long idOrder = System.currentTimeMillis() / 1000;
         String dateNow = formatter.format(date);
         do {
@@ -81,7 +86,7 @@ public class OrderView {
                 orderService.add(order);
                 do {
                     System.out.println("Nhập 'Y' để tiếp tục mua thêm <==> Nhập 'C' để tạo Order <==> Nhập 'N' để hủy Order");
-                    String choice = input.nextLine();
+                    String choice = input.nextLine().toUpperCase();
                     flag = false;
                     switch (choice) {
                         case "Y":
@@ -90,7 +95,11 @@ public class OrderView {
                             printOrderView(idOrder);
                             return;
                         case "N":
-                            removerOrderView(idOrder);
+                            try {
+                                removerOrderView(idOrder);
+                            }catch (Exception e){
+                                System.out.println("Đã hủy đơn hàng");
+                            }
                             return;
                         default:
                             System.out.println("Vui lòng chọn đúng chức năng");
@@ -108,7 +117,7 @@ public class OrderView {
     public void printOrderView(long idOrder) {
         Order order = new Order(idOrder);
         String dateNow = orderService.getdateNow(order);
-        System.out.println("------------------------------ SẢN PHẨM ORDER ------------------------------");
+        System.out.println("---------------------------------- SẢN PHẨM ORDER ----------------------------------------------");
         System.out.println("ID ORDER: " + idOrder + "-------------------------" + "DATE ORDER: " + dateNow);
         System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                 "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
@@ -142,7 +151,8 @@ public class OrderView {
             }
         } while (true);
     }
-    public void printItemOrder(){
+
+    public void printItemOrder() {
         do {
             try {
                 System.out.println("Nhập ID Order cần in: ");
@@ -161,12 +171,13 @@ public class OrderView {
             }
         } while (true);
     }
-    public void printAllOrderView(){
-        System.out.println("--------------------------------------- SẢN PHẨM ORDER -----------------------------------");
-        System.out.printf("%-15s %-15s %-25s %-20s %-15s %-20s\n", "ID ORDER","ID SẢN PHẨM", "TÊN SẢN PHẨM",
-                "SỐ LƯỢNG", "GIÁ SẢN PHẨM","NGÀY ORDER");
+
+    public void printAllOrderView() {
+        System.out.println("------------------------------------------------ SẢN PHẨM ORDER --------------------------------------------");
+        System.out.printf("%-15s %-15s %-20s %-15s %-15s %-20s\n", "ID ORDER", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
+                "SỐ LƯỢNG", "GIÁ SẢN PHẨM", "NGÀY ORDER");
         orderService.printAllOrder();
-        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------");
     }
 
 }

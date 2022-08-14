@@ -13,7 +13,7 @@ public class LoginUserView {
         boolean flag = true;
         UserService userService = new UserService();
         do {
-            System.out.println("==============ĐĂNG NHẬP HỆ THỐNG COFFEE SHOP==============");
+            System.out.println("======================ĐĂNG NHẬP HỆ THỐNG COFFEE SHOP======================");
             System.out.println("Username:");
             String username = input.nextLine().toLowerCase();
             System.out.println("Password:");

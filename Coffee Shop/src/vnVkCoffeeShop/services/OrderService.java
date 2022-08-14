@@ -82,7 +82,7 @@ public class OrderService {
     public void printAllOrder(){
         List<Order> orders = listOrder();
         for (Order item : orders) {
-            System.out.printf("%-15s %-15s %-25s %-20s %-15s %-20s\n",item.getIdOrder(), item.getIdProduct(),
+            System.out.printf("%-15s %-15s %-20s %-15s %-15s %-20s\n",item.getIdOrder(), item.getIdProduct(),
                     item.getNameProduct(),item.getQuantity(), item.getPrice(),item.getDate());
         }
     }

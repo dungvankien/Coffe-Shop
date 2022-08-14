@@ -1,5 +1,7 @@
 package vnVkCoffeeShop.model;
 
+import java.util.Objects;
+
 public class Order {
     private long idOrder;
     private String idProduct;
@@ -83,7 +85,19 @@ public class Order {
 
     @Override
     public String toString() {
-        return idOrder + "," + idProduct + "," + nameProduct + "," + quantity + "," + price + "," +
-                total + "," + date;
+        return idOrder + "," + idProduct + "," + nameProduct + "," + quantity + "," + price + "," + date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return idOrder == order.idOrder;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idOrder);
     }
 }
