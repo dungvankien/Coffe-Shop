@@ -23,8 +23,23 @@ public class UserView {
                     addUserView();
                     break;
                 case "2":
-
-
+                    editUserView();
+                    break;
+                case "3":
+                    removeUserView();
+                    break;
+                case "4":
+                    printUserView();
+                    break;
+                case "5":
+                    findUserView();
+                    break;
+                case "0":
+                    Menu.getMenuYesNo();
+                    break;
+                default:
+                    System.out.println("Vui lòng chọn đúng chức năng");
+                    Menu.getMenuYesNo();
             }
 
         } while (!choice.equals("0"));
@@ -64,16 +79,16 @@ public class UserView {
             } while (true);
             System.out.println("Nhập địa chỉ: ");
             String address = input.nextLine();
-            do{
+            do {
                 try {
                     System.out.println("Nhập phân quyền sử dụng:");
                     role = Role.parseRole(input.nextLine().toUpperCase());
                     break;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Nhập lại đúng phân quền admin hoặc user");
                     Menu.getMenuYesNo();
                 }
-            }while (true);
+            } while (true);
             do {
                 System.out.println("Nhập tên username: ");
                 username = input.nextLine().toLowerCase();
@@ -105,4 +120,123 @@ public class UserView {
             Menu.getMenuYesNo();
         }
     }
+
+    public void editUserView() {
+        System.out.println("Nhập ID User cần chỉnh: ");
+        String idUserEdit = input.nextLine();
+        User userEdit = new User(idUserEdit);
+        if (userService.find(userEdit)) {
+            Menu.getMenuEditUser();
+            do {
+                System.out.println("Nhập số cần chỉnh: ");
+                String number = input.nextLine();
+                String value = "";
+                if (number.equals("0")) {
+                    Menu.getMenuYesNo();
+                    break;
+                }
+                if (number.equals("1") || number.equals("2") || number.equals("3") || number.equals("4")) {
+                    if (number.equals("1")) {
+                        do {
+                            try {
+                                System.out.println("Nhập phân quyền cần thay đổi:");
+                                value = input.nextLine().toUpperCase();
+                                Role.parseRole(value);
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Nhập lại đúng phân quền admin hoặc user");
+                                Menu.getMenuYesNo();
+                            }
+                        } while (true);
+                    }
+                    if (number.equals("2")) {
+                        do {
+                            System.out.println("Nhập số điện thoại cần thay đổi: ");
+                            value = input.nextLine();
+                            if (ValidateUtils.isPhoneVaild(value)) {
+                                break;
+                            } else {
+                                System.out.println("Nhập lại đúng số điện thoại: ");
+                                Menu.getMenuYesNo();
+                            }
+                        } while (true);
+                    }
+                    if (number.equals("3")) {
+                        do {
+                            System.out.println("Nhập tên username cần thay đổi: ");
+                            value = input.nextLine().toLowerCase();
+                            if (ValidateUtils.isUserNameVaild(value)) {
+                                break;
+                            } else {
+                                System.out.println("Nhập lại username có 4-12 ký tự" +
+                                        " không có ký tự đặc biệt ");
+                                Menu.getMenuYesNo();
+                            }
+                        } while (true);
+                    }
+                    if (number.equals("4")) {
+                        do {
+                            System.out.println("Nhập password: ");
+                            value = input.nextLine();
+                            if (ValidateUtils.isPasswordVaild(value)) {
+                                break;
+                            } else {
+                                System.out.println("Nhập lại password có trên 8 ký tự " +
+                                        " không có ký tự đặc biệt ");
+                                Menu.getMenuYesNo();
+                            }
+                        } while (true);
+                    }
+                    userService.edit(userEdit, number, value);
+                    System.out.println("Giá trị đã được thay dổi: ");
+                    Menu.getMenuYesNo();
+                    break;
+                } else {
+                    System.out.println("Nhập không đúng giá trị");
+                    Menu.getMenuYesNo();
+                }
+            } while (true);
+        } else {
+            System.out.println("ID User không tồn tại");
+            Menu.getMenuYesNo();
+        }
+    }
+
+    public void removeUserView() {
+        System.out.println("Nhập ID user cần xóa: ");
+        String idUserRemove = input.nextLine();
+        User userRemove = new User(idUserRemove);
+        if (userService.find(userRemove)) {
+            userService.remove(userRemove);
+            System.out.println("Đã xóa User có ID :" + idUserRemove);
+            Menu.getMenuYesNo();
+        } else {
+            System.out.println("ID User không có trong thư viện");
+            Menu.getMenuYesNo();
+        }
+    }
+
+    public void printUserView() {
+        System.out.println("DANH SÁCH CÁC USER");
+        System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", "ID USER", "TÊN NHÂN VIÊN",
+                "SỐ ĐIỆN THOẠI", "EMAIL", "ĐỊA CHỈ", "PHÂN QUYỀN", "USERNAME", "PASSWORD");
+        userService.print();
+        Menu.getMenuYesNo();
+    }
+
+    public void findUserView() {
+        System.out.println("Nhập ID User cần tìm kiếm");
+        String idUserFind = input.nextLine();
+        User userFind = new User(idUserFind);
+        if (userService.find(userFind)) {
+            System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", "ID USER", "TÊN NHÂN VIÊN",
+                    "SỐ ĐIỆN THOẠI", "EMAIL", "ĐỊA CHỈ", "PHÂN QUYỀN", "USERNAME", "PASSWORD");
+            userService.printItemUser(userFind);
+            Menu.getMenuYesNo();
+        } else {
+            System.out.println("ID User không tồn tại");
+            Menu.getMenuYesNo();
+        }
+    }
 }
+

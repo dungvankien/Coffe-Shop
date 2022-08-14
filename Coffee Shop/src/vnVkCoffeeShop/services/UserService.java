@@ -74,25 +74,23 @@ public class UserService {
         DataConvertUtlis.write(PATH, users);
     }
 
-    public void edit(User user, int number, String parameters) {
+    public void edit(User user, String number, String parameters) {
         List<User> users = listUser();
         for (User item : users) {
             if (item.equals(user)) {
                 switch (number) {
-                    case 1:
-                        item.setIdEmployee(parameters);
+                    case "1":
+                        item.setRole(Role.parseRole(parameters));
                         break;
-                    case 2:
-                        item.setFullName(parameters);
-                        break;
-                    case 3:
+                    case "2":
                         item.setPhoneNumber(parameters);
                         break;
-                    case 4:
-                        item.setEmail(parameters);
+                    case "3":
+                        item.setUsername(parameters);
                         break;
-                    case 5:
-                        item.setRole(Role.parseRole(parameters));
+                    case "4":
+                        item.setPassword(parameters);
+                        break;
                     default:
                         System.out.println("Error");
                         break;
@@ -103,11 +101,10 @@ public class UserService {
         }
     }
 
-    public User remove(User user) {
+    public void remove(User user) {
         List<User> users = listUser();
         users.remove(user);
         DataConvertUtlis.write(PATH, users);
-        return user;
     }
 
     public boolean find(User user) {
@@ -118,15 +115,19 @@ public class UserService {
     public void print() {
         List<User> users = listUser();
         for (User user : users) {
-            System.out.println(user);
+            System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", user.getIdEmployee(),
+                    user.getFullName(), user.getPhoneNumber(),user.getEmail(),user.getAddress(),
+                    user.getRole(),user.getUsername(),user.getPassword());
         }
     }
 
-    public void printItemProduc(User user) {
+    public void printItemUser(User user) {
         List<User> users = listUser();
         for (User item : users) {
             if (item.equals(user)) {
-                System.out.println(item);
+                System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", item.getIdEmployee(),
+                        item.getFullName(), item.getPhoneNumber(),item.getEmail(),item.getAddress(),
+                        item.getRole(),item.getUsername(),item.getPassword());
                 break;
             }
         }

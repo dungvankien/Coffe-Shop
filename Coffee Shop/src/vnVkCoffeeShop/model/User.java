@@ -120,14 +120,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(idEmployee, user.idEmployee) && Objects.equals(fullName,
-                user.fullName) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(email, user.email)
-                && Objects.equals(address, user.address) && role == user.role && Objects.equals(username, user.username)
-                && Objects.equals(password, user.password);
+        return idEmployee.equals(user.idEmployee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEmployee, fullName, phoneNumber, email, address, role, username, password);
+        return Objects.hash(idEmployee);
     }
 }

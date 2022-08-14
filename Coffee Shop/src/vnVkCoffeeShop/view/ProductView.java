@@ -102,6 +102,10 @@ public class ProductView {
                 System.out.println("Nhập số cần chỉnh: ");
                 String number = input.nextLine();
                 String value = "";
+                if (number.equals("0")) {
+                    Menu.getMenuYesNo();
+                    break;
+                }
                 if (number.equals("1") || number.equals("2") || number.equals("3") || number.equals("4")) {
                     if (number.equals("1") || number.equals("2")) {
                         System.out.println("Nhập giá trị cần thay đổi: ");
