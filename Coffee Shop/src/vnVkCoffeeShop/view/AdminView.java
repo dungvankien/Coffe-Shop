@@ -25,7 +25,7 @@ public class AdminView {
                     //Thuc hien ban hang
                     break;
                 case "0":
-                    ///ket thuc chung trinh
+                    Menu.getMenuYesNo();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");

@@ -41,6 +41,9 @@ public class ProductView {
                     productService.sortDownPrice();
                     printProductView();
                     break;
+                case "0":
+                    Menu.getMenuYesNo();
+                    break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");
                     Menu.getMenuYesNo();

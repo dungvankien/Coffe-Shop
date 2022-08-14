@@ -2,7 +2,6 @@ package vnVkCoffeeShop.view;
 
 import vnVkCoffeeShop.menu.Menu;
 import vnVkCoffeeShop.model.Role;
-import vnVkCoffeeShop.model.User;
 import vnVkCoffeeShop.services.UserService;
 
 import java.util.Scanner;
@@ -22,14 +21,11 @@ public class LoginUserView {
             if (username.equals("admin") && password.equals("admin")) {
                 AdminView adminView = new AdminView();
                 adminView.workOfAdmin();
-            }
-            if (userService.checkUserName(username) && userService.checkPassword(password)) {
-                User user = new User(username, password);
-                if ((user.getRole()).equals(Role.ADMIN)) {
+            } else if (userService.checkUserName(username) && userService.checkPassword(password)) {
+                if ((userService.checkRole(username)).equals(Role.ADMIN)) {
                     AdminView adminView = new AdminView();
                     adminView.workOfAdmin();
-                }
-                if ((user.getRole()).equals(Role.USER)) {
+                } else {
                     GuestView guestView = new GuestView();
                     guestView.workOfGuest();
                 }
@@ -39,7 +35,5 @@ public class LoginUserView {
                 flag = false;
             }
         } while (!flag);
-
-
     }
 }

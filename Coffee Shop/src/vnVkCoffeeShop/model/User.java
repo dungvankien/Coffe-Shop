@@ -19,11 +19,6 @@ public class User {
         this.idEmployee = idEmployee;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public User(String idEmployee, String fullName, String phoneNumber,
                 String email, String address, Role role, String username, String password) {
         this.idEmployee = idEmployee;

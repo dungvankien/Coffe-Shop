@@ -33,7 +33,7 @@ public class UserService {
 
     public boolean checkUserName(String userName) {
         if (ValidateUtils.isUserNameVaild(userName)) {
-            List<User> users = new ArrayList<>();
+            List<User> users = listUser();
             for (User item : users) {
                 if ((item.getUsername()).equals(userName)) {
                     return true;
@@ -47,7 +47,7 @@ public class UserService {
 
     public boolean checkPassword(String password) {
         if (ValidateUtils.isPasswordVaild(password)) {
-            List<User> users = new ArrayList<>();
+            List<User> users = listUser();
             for (User item : users) {
                 if ((item.getPassword()).equals(password)) {
                     return true;
@@ -57,6 +57,15 @@ public class UserService {
         } else {
             return false;
         }
+    }
+    public Role checkRole(String userName){
+        List<User> users = listUser();
+        for(User item: users){
+            if(item.getUsername().equals(userName)){
+                return item.getRole();
+            }
+        }
+        return null;
     }
 
     public void add(User user) {
