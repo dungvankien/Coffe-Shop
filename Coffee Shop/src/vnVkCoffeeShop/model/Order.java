@@ -1,7 +1,7 @@
 package vnVkCoffeeShop.model;
 
 public class Order {
-    private String idOrder;
+    private long idOrder;
     private String idProduct;
     private String nameProduct;
     private int quantity;
@@ -9,37 +9,36 @@ public class Order {
     private double total;
     private String date;
 
-    public Order() {
+    public Order(long idOrder) {
+        this.idOrder = idOrder;
     }
 
-    public Order(String idOrder, String idProduct, String nameProduct,
-                 int quantity, double price, double total, String date) {
+    public Order(long idOrder, String idProduct, String nameProduct,
+                 int quantity, double price, String date) {
         this.idOrder = idOrder;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
         this.price = price;
-        this.total = total;
         this.date = date;
     }
 
     public static Order parseOrder(String record) {
         String[] arrayOrder = record.split(",");
-        String idOrder = arrayOrder[0];
+        Long idOrder = Long.parseLong(arrayOrder[0]);
         String idProduct = arrayOrder[1];
         String nameProduct = arrayOrder[2];
         Integer quantity = Integer.parseInt(arrayOrder[3]);
         Double price = Double.parseDouble(arrayOrder[4]);
-        Double total = Double.parseDouble(arrayOrder[5]);
-        String date = arrayOrder[6];
-        return new Order(idOrder, idProduct, nameProduct, quantity, price, total, date);
+        String date = arrayOrder[5];
+        return new Order(idOrder, idProduct, nameProduct, quantity, price, date);
     }
 
-    public String getIdOrder() {
+    public Long getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(String idOrder) {
+    public void setIdOrder(Long idOrder) {
         this.idOrder = idOrder;
     }
 
@@ -74,15 +73,6 @@ public class Order {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
     public String getDate() {
         return date;
     }

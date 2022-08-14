@@ -22,7 +22,8 @@ public class AdminView {
                     userView.workOfUser();
                     break;
                 case "3":
-                    //Thuc hien ban hang
+                    OrderView orderView=new OrderView();
+                      orderView.workOFOrder();
                     break;
                 case "0":
                     Menu.getMenuYesNo();

@@ -26,15 +26,11 @@ public class Menu {
     public static void getMenuGuest() {
         System.out.println("^^^^^^^^^^^^^^SALE MENU^^^^^^^^^^^^^^");
         System.out.println("1. Tạo đơn hàng\n" +
-                "2. Xóa đơn hàng\n" +
-                "3. Chỉnh sửa đơn hàng\n" +
-                "4. In hóa đơn\n");
+                "2. Xóa đơn hàng theo ID\n" +
+                "3. In đơn hảng theo ID\n" +
+                "4. In toàn bộ đơn hàng\n" +
+                "0. Thoát chương trình");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    }
-
-    public static void createOrder() {
-        System.out.println("--------------TẠO ĐƠN HÀNG--------------");
-        System.out.println("1. Nhập sản phâmr");
     }
 
     public static void getMenuAdmin() {
