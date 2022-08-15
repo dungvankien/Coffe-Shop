@@ -25,6 +25,8 @@ public class OrderView {
             choice = input.nextLine();
             switch (choice) {
                 case "1":
+                    System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
+                            "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
                     productService.print();
                     addOrder();
                     Menu.getMenuYesNo();
@@ -54,7 +56,7 @@ public class OrderView {
     public void addOrder() {
         boolean flag;
         Integer amount = null;
-        long idOrder = System.currentTimeMillis() / 1000;
+        String idOrder = String.valueOf(System.currentTimeMillis() / 1000);
         String dateNow = formatter.format(date);
         do {
             System.out.println("Nhập ID sản phẩm cần bán: ");
@@ -79,7 +81,6 @@ public class OrderView {
                     } catch (Exception e) {
                         System.out.println("Nhập đúng số lượng cần mua");
                         flag = true;
-
                     }
                 } while (flag);
                 Order order = new Order(idOrder, idProduct, nameProduct, amount, priceProduct, dateNow);
@@ -97,7 +98,7 @@ public class OrderView {
                         case "N":
                             try {
                                 removerOrderView(idOrder);
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println("Đã hủy đơn hàng");
                             }
                             return;
@@ -114,7 +115,7 @@ public class OrderView {
         } while (true);
     }
 
-    public void printOrderView(long idOrder) {
+    public void printOrderView(String idOrder) {
         Order order = new Order(idOrder);
         String dateNow = orderService.getdateNow(order);
         System.out.println("---------------------------------- SẢN PHẨM ORDER ----------------------------------------------");
@@ -122,12 +123,13 @@ public class OrderView {
         System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                 "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
         orderService.printItemOrder(order);
-        System.out.println("<<<<<<======Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<======");
+        System.out.println("\n<<<<<<<<<========Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<========\n");
     }
 
-    public void removerOrderView(long idOrder) {
-        Order order = new Order(idOrder);
-        orderService.remove(order);
+    public void removerOrderView(String idOrder) {
+        //Order order = new Order(idOrder);
+        orderService.returnQuantilyProduct(idOrder);
+        orderService.removeItemOrder(idOrder);
         System.out.println("Đã hủy Oder: ");
     }
 
@@ -135,16 +137,16 @@ public class OrderView {
         do {
             try {
                 System.out.println("Nhập ID Order cần xóa: ");
-                long idOrder = Long.parseLong(input.nextLine());
+                String idOrder = input.nextLine();
                 Order order = new Order(idOrder);
                 if (orderService.find(order)) {
-                    orderService.removeItemOrder(order);
+                    orderService.removeItemOrder(idOrder);
                     System.out.println(" Đã xóa Order có ID: " + idOrder);
+                    break;
                 } else {
                     System.out.println("ID Order không tồn tại:");
                     Menu.getMenuYesNo();
                 }
-                break;
             } catch (Exception e) {
                 System.out.println("Nhập ID Order bị sai cần nhập lại");
                 Menu.getMenuYesNo();
@@ -156,7 +158,7 @@ public class OrderView {
         do {
             try {
                 System.out.println("Nhập ID Order cần in: ");
-                long idOrder = Long.parseLong(input.nextLine());
+                String idOrder = input.nextLine();
                 Order order = new Order(idOrder);
                 if (orderService.find(order)) {
                     printOrderView(idOrder);

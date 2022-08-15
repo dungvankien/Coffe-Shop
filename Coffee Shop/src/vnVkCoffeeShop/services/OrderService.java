@@ -67,17 +67,15 @@ public class OrderService {
         return false;
     }
 
-    public void remove(Order order) {
+    public void returnQuantilyProduct(String idOrder) {
         List<Order> orders = listOrder();
+        ProductService productService=new ProductService();
         for (Order item : orders) {
-            if (item.getIdOrder().equals(order.getIdOrder())) {
-                ProductService productService=new ProductService();
+            if (item.getIdOrder().equals(idOrder)) {
                 Product product=new Product(item.getIdProduct());
                 productService.subtractAddition(product,item.getQuantity());
-                orders.remove(item);
             }
         }
-        DataConvertUtlis.write(PATH, orders);
     }
     public void printAllOrder(){
         List<Order> orders = listOrder();
@@ -96,14 +94,13 @@ public class OrderService {
         }
     }
 
-    public void removeItemOrder(Order order) {
+    public void removeItemOrder(String idOrder) {
         List<Order> orders = listOrder();
         for (Order item:orders){
-            if(item.getIdOrder().equals(order.getIdOrder())){
+            if(item.getIdOrder().equals(idOrder)){
                 orders.remove(item);
             }
         }
         DataConvertUtlis.write(PATH, orders);
     }
-
 }

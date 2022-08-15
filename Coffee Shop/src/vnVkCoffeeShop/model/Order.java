@@ -3,7 +3,7 @@ package vnVkCoffeeShop.model;
 import java.util.Objects;
 
 public class Order {
-    private long idOrder;
+    private String idOrder;
     private String idProduct;
     private String nameProduct;
     private int quantity;
@@ -11,11 +11,11 @@ public class Order {
     private double total;
     private String date;
 
-    public Order(long idOrder) {
+    public Order(String idOrder) {
         this.idOrder = idOrder;
     }
 
-    public Order(long idOrder, String idProduct, String nameProduct,
+    public Order(String idOrder, String idProduct, String nameProduct,
                  int quantity, double price, String date) {
         this.idOrder = idOrder;
         this.idProduct = idProduct;
@@ -27,7 +27,7 @@ public class Order {
 
     public static Order parseOrder(String record) {
         String[] arrayOrder = record.split(",");
-        Long idOrder = Long.parseLong(arrayOrder[0]);
+        String idOrder = arrayOrder[0];
         String idProduct = arrayOrder[1];
         String nameProduct = arrayOrder[2];
         Integer quantity = Integer.parseInt(arrayOrder[3]);
@@ -36,11 +36,11 @@ public class Order {
         return new Order(idOrder, idProduct, nameProduct, quantity, price, date);
     }
 
-    public Long getIdOrder() {
+    public String getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(Long idOrder) {
+    public void setIdOrder(String idOrder) {
         this.idOrder = idOrder;
     }
 
@@ -93,7 +93,7 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return idOrder == order.idOrder;
+        return idOrder.equals(order.idOrder);
     }
 
     @Override
