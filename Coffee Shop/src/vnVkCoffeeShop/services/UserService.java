@@ -8,18 +8,10 @@ import vnVkCoffeeShop.utlis.ValidateUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService {
+public class UserService implements InterfaceUser {
     public final static String PATH = "data/user.csv";
-    private static UserService instance;
 
     public UserService() {
-    }
-
-    public static UserService getInstance() {
-        if (instance == null) {
-            instance = new UserService();
-        }
-        return instance;
     }
 
     public List<User> listUser() {
@@ -58,22 +50,25 @@ public class UserService {
             return false;
         }
     }
-    public Role checkRole(String userName){
+
+    public Role checkRole(String userName) {
         List<User> users = listUser();
-        for(User item: users){
-            if(item.getUsername().equals(userName)){
+        for (User item : users) {
+            if (item.getUsername().equals(userName)) {
                 return item.getRole();
             }
         }
         return null;
     }
 
+    @Override
     public void add(User user) {
         List<User> users = listUser();
         users.add(user);
         DataConvertUtlis.write(PATH, users);
     }
 
+    @Override
     public void edit(User user, String number, String parameters) {
         List<User> users = listUser();
         for (User item : users) {
@@ -101,38 +96,43 @@ public class UserService {
         }
     }
 
+    @Override
     public void remove(User user) {
         List<User> users = listUser();
         users.remove(user);
         DataConvertUtlis.write(PATH, users);
     }
 
+    @Override
     public boolean find(User user) {
         List<User> users = listUser();
         return users.contains(user);
     }
 
+    @Override
     public void print() {
         List<User> users = listUser();
         for (User user : users) {
             System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", user.getIdEmployee(),
-                    user.getFullName(), user.getPhoneNumber(),user.getEmail(),user.getAddress(),
-                    user.getRole(),user.getUsername(),user.getPassword());
+                    user.getFullName(), user.getPhoneNumber(), user.getEmail(), user.getAddress(),
+                    user.getRole(), user.getUsername(), user.getPassword());
         }
     }
 
+    @Override
     public void printItemUser(User user) {
         List<User> users = listUser();
         for (User item : users) {
             if (item.equals(user)) {
                 System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", item.getIdEmployee(),
-                        item.getFullName(), item.getPhoneNumber(),item.getEmail(),item.getAddress(),
-                        item.getRole(),item.getUsername(),item.getPassword());
+                        item.getFullName(), item.getPhoneNumber(), item.getEmail(), item.getAddress(),
+                        item.getRole(), item.getUsername(), item.getPassword());
                 break;
             }
         }
     }
 
+    @Override
     public void clear() {
         List<User> users = listUser();
         users.clear();

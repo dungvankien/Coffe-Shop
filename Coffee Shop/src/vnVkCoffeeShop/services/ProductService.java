@@ -10,16 +10,8 @@ import java.util.List;
 
 public class ProductService implements InterfaceProduct {
     public final static String PATH = "data/products.csv";
-    private static ProductService instance;
 
     public ProductService() {
-    }
-
-    public static ProductService getInstance() {
-        if (instance == null) {
-            instance = new ProductService();
-        }
-        return instance;
     }
 
     @Override

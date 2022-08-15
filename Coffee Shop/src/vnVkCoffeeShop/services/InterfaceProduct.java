@@ -6,11 +6,11 @@ import java.util.List;
 
 
 public interface InterfaceProduct {
-    public List<Product> listProducts();
+  List<Product> listProducts();
 
     void add(Product product);
 
-    Product remove(Product product);
+     Product remove(Product product);
 
     void edit(Product product, String number, String parameters);
 
@@ -20,7 +20,7 @@ public interface InterfaceProduct {
 
     void print();
 
-    public void printItemProduc(Product product);
+    void printItemProduc(Product product);
 
     boolean find(Product product);
 }

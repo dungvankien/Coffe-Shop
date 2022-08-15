@@ -127,7 +127,6 @@ public class OrderView {
     }
 
     public void removerOrderView(String idOrder) {
-        //Order order = new Order(idOrder);
         orderService.returnQuantilyProduct(idOrder);
         orderService.removeItemOrder(idOrder);
         System.out.println("Đã hủy Oder: ");
@@ -148,9 +147,8 @@ public class OrderView {
                     Menu.getMenuYesNo();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-//                System.out.println("Nhập ID Order bị sai cần nhập lại");
-//                Menu.getMenuYesNo();
+                System.out.println("Nhập ID Order bị sai cần nhập lại");
+                Menu.getMenuYesNo();
             }
         } while (true);
     }

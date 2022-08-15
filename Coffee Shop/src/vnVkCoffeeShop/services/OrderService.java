@@ -7,18 +7,10 @@ import vnVkCoffeeShop.utlis.DataConvertUtlis;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderService {
+public class OrderService implements InterfaceOrder {
     public final static String PATH = "data/order.csv";
-    private static OrderService instance;
 
     public OrderService() {
-    }
-
-    public static OrderService getInstance() {
-        if (instance == null) {
-            instance = new OrderService();
-        }
-        return instance;
     }
 
     public List<Order> listOrder() {
@@ -30,12 +22,14 @@ public class OrderService {
         return orders;
     }
 
+    @Override
     public void add(Order order) {
         List<Order> orders = listOrder();
         orders.add(order);
         DataConvertUtlis.write(PATH, orders);
     }
 
+    @Override
     public String getdateNow(Order order) {
         List<Order> orders = listOrder();
         for (Order item : orders) {
@@ -46,6 +40,7 @@ public class OrderService {
         return null;
     }
 
+    @Override
     public Double sumPriceOrder(Order order) {
         List<Order> orders = listOrder();
         double sumPrice = 0.0;
@@ -57,6 +52,7 @@ public class OrderService {
         return sumPrice;
     }
 
+    @Override
     public boolean find(Order order) {
         List<Order> orders = listOrder();
         for (Order item : orders) {
@@ -67,23 +63,28 @@ public class OrderService {
         return false;
     }
 
+    @Override
     public void returnQuantilyProduct(String idOrder) {
         List<Order> orders = listOrder();
-        ProductService productService=new ProductService();
+        ProductService productService = new ProductService();
         for (Order item : orders) {
             if (item.getIdOrder().equals(idOrder)) {
-                Product product=new Product(item.getIdProduct());
-                productService.subtractAddition(product,item.getQuantity());
+                Product product = new Product(item.getIdProduct());
+                productService.subtractAddition(product, item.getQuantity());
             }
         }
     }
-    public void printAllOrder(){
+
+    @Override
+    public void printAllOrder() {
         List<Order> orders = listOrder();
         for (Order item : orders) {
-            System.out.printf("%-15s %-15s %-20s %-15s %-15s %-20s\n",item.getIdOrder(), item.getIdProduct(),
-                    item.getNameProduct(),item.getQuantity(), item.getPrice(),item.getDate());
+            System.out.printf("%-15s %-15s %-20s %-15s %-15s %-20s\n", item.getIdOrder(), item.getIdProduct(),
+                    item.getNameProduct(), item.getQuantity(), item.getPrice(), item.getDate());
         }
     }
+
+    @Override
     public void printItemOrder(Order order) {
         List<Order> orders = listOrder();
         for (Order item : orders) {
@@ -94,6 +95,7 @@ public class OrderService {
         }
     }
 
+    @Override
     public void removeItemOrder(String idOrder) {
         List<Order> orders = listOrder();
         orders.removeIf(item -> item.getIdOrder().equals(idOrder));
