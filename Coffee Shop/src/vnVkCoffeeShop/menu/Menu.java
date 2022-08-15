@@ -5,19 +5,19 @@ import java.util.Scanner;
 public class Menu {
     static Scanner input = new Scanner(System.in);
 
-    public static void getMenuYesNo() {
+    public static boolean getMenuYesNo() {
         String choice;
         do {
             System.out.println("========================================================================");
-            System.out.println("Chọn 'R' => Quay lại          Chọn 'E' => Thoát chương trình");
+            System.out.println("Chọn 'R' => Quay lại                Chọn 'E' => Thoát chương trình");
             choice = input.nextLine().toLowerCase();
             if (choice.equals("e")) {
                 System.out.println("========================================================================");
                 System.exit(0);
             } else if (choice.equals("r")) {
                 System.out.println("========================================================================");
-                return;
-            } else {
+                return true;
+            }  else {
                 System.out.println("Nhập Không chính xác vui lòng nhập lại");
             }
         } while (true);

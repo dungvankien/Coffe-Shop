@@ -75,16 +75,22 @@ public class OrderView {
                             flag = false;
                         } else {
                             System.out.println("Kiểm tra lại và chọn số lượng phù hợp: ");
+                            System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
+                                    "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
+                            productService.printItemProduc(product);
                             flag = true;
                             Menu.getMenuYesNo();
+                            break;
                         }
                     } catch (Exception e) {
                         System.out.println("Nhập đúng số lượng cần mua");
                         flag = true;
                     }
                 } while (flag);
-                Order order = new Order(idOrder, idProduct, nameProduct, amount, priceProduct, dateNow);
-                orderService.add(order);
+                if (!flag) {
+                    Order order = new Order(idOrder, idProduct, nameProduct, amount, priceProduct, dateNow);
+                    orderService.add(order);
+                }
                 do {
                     System.out.println("Nhập 'Y' để tiếp tục mua thêm <==> Nhập 'C' để tạo Order <==> Nhập 'N' để hủy Order");
                     String choice = input.nextLine().toUpperCase();
@@ -123,7 +129,7 @@ public class OrderView {
         System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                 "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
         orderService.printItemOrder(order);
-        System.out.println("\n<<<<<<<<<========Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<========\n");
+        System.out.println("\n==========>>>>>>>>>>>>>Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<========\n");
     }
 
     public void removerOrderView(String idOrder) {
