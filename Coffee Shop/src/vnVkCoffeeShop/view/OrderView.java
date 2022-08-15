@@ -148,8 +148,9 @@ public class OrderView {
                     Menu.getMenuYesNo();
                 }
             } catch (Exception e) {
-                System.out.println("Nhập ID Order bị sai cần nhập lại");
-                Menu.getMenuYesNo();
+                e.printStackTrace();
+//                System.out.println("Nhập ID Order bị sai cần nhập lại");
+//                Menu.getMenuYesNo();
             }
         } while (true);
     }

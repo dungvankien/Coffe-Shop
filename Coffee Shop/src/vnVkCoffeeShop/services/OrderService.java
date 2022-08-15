@@ -96,11 +96,7 @@ public class OrderService {
 
     public void removeItemOrder(String idOrder) {
         List<Order> orders = listOrder();
-        for (Order item:orders){
-            if(item.getIdOrder().equals(idOrder)){
-                orders.remove(item);
-            }
-        }
+        orders.removeIf(item -> item.getIdOrder().equals(idOrder));
         DataConvertUtlis.write(PATH, orders);
     }
 }
