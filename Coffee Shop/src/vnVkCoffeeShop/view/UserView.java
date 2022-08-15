@@ -35,11 +35,11 @@ public class UserView {
                     findUserView();
                     break;
                 case "0":
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
             }
 
         } while (!choice.equals("0"));
@@ -64,7 +64,7 @@ public class UserView {
                     break;
                 } else {
                     System.out.println("Nhập lại đúng số điện thoại: ");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             do {
@@ -74,7 +74,7 @@ public class UserView {
                     break;
                 } else {
                     System.out.println("Nhập lại đúng email: ");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             System.out.println("Nhập địa chỉ: ");
@@ -86,7 +86,7 @@ public class UserView {
                     break;
                 } catch (Exception e) {
                     System.out.println("Nhập lại đúng phân quền admin hoặc user");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             do {
@@ -97,7 +97,7 @@ public class UserView {
                 } else {
                     System.out.println("Nhập lại username có 4-12 ký tự" +
                             " không có ký tự đặc biệt ");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             do {
@@ -108,16 +108,16 @@ public class UserView {
                 } else {
                     System.out.println("Nhập lại password có trên 8 ký tự " +
                             " không có ký tự đặc biệt ");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             User user = new User(idEmployee, fullName, phoneNumber, email, address, role, username, password);
             userService.add(user);
             System.out.println("User được thêm vào phân quyền");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         } else {
             System.out.println("ID đã có trong danh sách sử dụng: ");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 
@@ -132,7 +132,7 @@ public class UserView {
                 String number = input.nextLine();
                 String value = "";
                 if (number.equals("0")) {
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 }
                 if (number.equals("1") || number.equals("2") || number.equals("3") || number.equals("4")) {
@@ -145,7 +145,7 @@ public class UserView {
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Nhập lại đúng phân quền admin hoặc user");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
@@ -157,7 +157,7 @@ public class UserView {
                                 break;
                             } else {
                                 System.out.println("Nhập lại đúng số điện thoại: ");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
@@ -170,7 +170,7 @@ public class UserView {
                             } else {
                                 System.out.println("Nhập lại username có 4-12 ký tự" +
                                         " không có ký tự đặc biệt ");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
@@ -183,22 +183,22 @@ public class UserView {
                             } else {
                                 System.out.println("Nhập lại password có trên 8 ký tự " +
                                         " không có ký tự đặc biệt ");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
                     userService.edit(userEdit, number, value);
                     System.out.println("Giá trị đã được thay dổi: ");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 } else {
                     System.out.println("Nhập không đúng giá trị");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
         } else {
             System.out.println("ID User không tồn tại");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 
@@ -207,12 +207,16 @@ public class UserView {
         String idUserRemove = input.nextLine();
         User userRemove = new User(idUserRemove);
         if (userService.find(userRemove)) {
-            userService.remove(userRemove);
-            System.out.println("Đã xóa User có ID :" + idUserRemove);
-            Menu.getMenuYesNo();
+            if(Menu.getMenuYesNo()){
+                userService.remove(userRemove);
+                System.out.println("Đã xóa User có ID :" + idUserRemove);
+                Menu.getMenuReturn();
+            }else {
+                return;
+            }
         } else {
             System.out.println("ID User không có trong thư viện");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 
@@ -221,7 +225,7 @@ public class UserView {
         System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", "ID USER", "TÊN NHÂN VIÊN",
                 "SỐ ĐIỆN THOẠI", "EMAIL", "ĐỊA CHỈ", "PHÂN QUYỀN", "USERNAME", "PASSWORD");
         userService.print();
-        Menu.getMenuYesNo();
+        Menu.getMenuReturn();
     }
 
     public void findUserView() {
@@ -232,10 +236,10 @@ public class UserView {
             System.out.printf("%-15s %-15s %-15s %-25s %-25s %-15s %-15s %-15s\n", "ID USER", "TÊN NHÂN VIÊN",
                     "SỐ ĐIỆN THOẠI", "EMAIL", "ĐỊA CHỈ", "PHÂN QUYỀN", "USERNAME", "PASSWORD");
             userService.printItemUser(userFind);
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         } else {
             System.out.println("ID User không tồn tại");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 }

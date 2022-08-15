@@ -29,26 +29,26 @@ public class OrderView {
                             "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
                     productService.print();
                     addOrder();
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 case "2":
                     removerOrderItem();
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 case "3":
                     printItemOrder();
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 case "4":
                     printAllOrderView();
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 case "0":
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
             }
         } while (!choice.equals("0"));
     }
@@ -79,7 +79,7 @@ public class OrderView {
                                     "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
                             productService.printItemProduc(product);
                             flag = true;
-                            Menu.getMenuYesNo();
+                            Menu.getMenuReturn();
                             break;
                         }
                     } catch (Exception e) {
@@ -110,13 +110,13 @@ public class OrderView {
                             return;
                         default:
                             System.out.println("Vui lòng chọn đúng chức năng");
-                            Menu.getMenuYesNo();
+                            Menu.getMenuReturn();
                             flag = true;
                     }
                 } while (flag);
             } else {
                 System.out.println("Id sản phẩm không có trong danh sách cần nhập lại");
-                Menu.getMenuYesNo();
+                Menu.getMenuReturn();
             }
         } while (true);
     }
@@ -124,12 +124,12 @@ public class OrderView {
     public void printOrderView(String idOrder) {
         Order order = new Order(idOrder);
         String dateNow = orderService.getdateNow(order);
-        System.out.println("---------------------------------- SẢN PHẨM ORDER ----------------------------------------------");
+        System.out.println("---------------------------------- SẢN PHẨM ORDER ----------------------------------------------\n");
         System.out.println("ID ORDER: " + idOrder + "-------------------------" + "DATE ORDER: " + dateNow);
-        System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
-                "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
+        System.out.printf("\n%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
+                "SỐ LƯỢNG", "GIÁ SẢN PHẨM\n");
         orderService.printItemOrder(order);
-        System.out.println("\n==========>>>>>>>>>>>>>Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<========\n");
+        System.out.println("\n=================>>>>>>>>>>>>>>>>>>>>Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<<<<<===========\n");
     }
 
     public void removerOrderView(String idOrder) {
@@ -145,16 +145,20 @@ public class OrderView {
                 String idOrder = input.nextLine();
                 Order order = new Order(idOrder);
                 if (orderService.find(order)) {
-                    orderService.removeItemOrder(idOrder);
-                    System.out.println(" Đã xóa Order có ID: " + idOrder);
-                    break;
+                    if (Menu.getMenuYesNo()) {
+                        orderService.removeItemOrder(idOrder);
+                        System.out.println(" Đã xóa Order có ID: " + idOrder);
+                        break;
+                    } else {
+                       break;
+                    }
                 } else {
                     System.out.println("ID Order không tồn tại:");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } catch (Exception e) {
                 System.out.println("Nhập ID Order bị sai cần nhập lại");
-                Menu.getMenuYesNo();
+                Menu.getMenuReturn();
             }
         } while (true);
     }
@@ -170,11 +174,11 @@ public class OrderView {
                     break;
                 } else {
                     System.out.println("ID Order không tồn tại:");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } catch (Exception e) {
                 System.out.println("Nhập ID Order bị sai cần nhập lại");
-                Menu.getMenuYesNo();
+                Menu.getMenuReturn();
             }
         } while (true);
     }

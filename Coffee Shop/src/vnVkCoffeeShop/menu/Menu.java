@@ -4,8 +4,25 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
+    public static boolean getMenuYesNo(){
+        String choice;
+        do {
+            System.out.println("===============================================");
+            System.out.println("Chọn 'Y' ===>> Xóa         Chọn 'N' ===>> Hủy ");
+            System.out.println("===============================================");
+            choice=input.nextLine().toLowerCase();
+            System.out.println("===============================================");
+            if(choice.equals("y")){
+                return true;
+            } else if (choice.equals("n")) {
+                return false;
+            }else {
+                System.out.println("Nhập Không chính xác vui lòng nhập lại");
+            }
+        }while (true);
+    }
 
-    public static boolean getMenuYesNo() {
+    public static void getMenuReturn() {
         String choice;
         do {
             System.out.println("========================================================================");
@@ -16,7 +33,7 @@ public class Menu {
                 System.exit(0);
             } else if (choice.equals("r")) {
                 System.out.println("========================================================================");
-                return true;
+                return;
             }  else {
                 System.out.println("Nhập Không chính xác vui lòng nhập lại");
             }
@@ -29,7 +46,7 @@ public class Menu {
                 "2. Xóa đơn hàng theo ID\n" +
                 "3. In đơn hảng theo ID\n" +
                 "4. In toàn bộ đơn hàng\n" +
-                "0. Thoát chương trình");
+                "0. Đăng xuất");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     }
 
@@ -38,7 +55,7 @@ public class Menu {
         System.out.println("1. Quản lý sản phẩm\n" +
                 "2. Quản lý User\n" +
                 "3. Thực hiện bán hàng\n" +
-                "0. Thoát chương trình");
+                "0. Đăng xuất");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     }
 
@@ -49,7 +66,7 @@ public class Menu {
                 "3. Xóa User trong thư viện\n" +
                 "4. In danh sách các User\n" +
                 "5. Tìm kiếm User trong thứ viện theo ID\n" +
-                "0. Thoát chương trình");
+                "0. Đăng xuất");
         System.out.println("******************************************************************************");
     }
     public static void getMenuEditUser(){
@@ -58,7 +75,7 @@ public class Menu {
                 "2. Chỉnh lại số điện thoại\n" +
                 "3. Thay đổi username\n" +
                 "4. Thay đổi mật khấu\n" +
-                "0. Thoát chương trình ");
+                "0. Đăng xuất ");
         System.out.println("******************************************************************************");
     }
 
@@ -71,7 +88,7 @@ public class Menu {
                 "5. Tìm kiếm sản phẩm theo ID\n" +
                 "6. Sắp xếp danh sách theo giá tăng dần\n" +
                 "7. Sắp xếp danh sách theo giá giảm dần\n" +
-                "0. Thoát chương trình ");
+                "0. Đăng xuất ");
         System.out.println("******************************************************************************");
     }
 
@@ -81,7 +98,7 @@ public class Menu {
                 "2. Chỉnh tên sản phẩm\n" +
                 "3. Chỉnh lại số lượng\n" +
                 "4. Chỉnh giá bán\n" +
-                "0. Thoát chương trình ");
+                "0. Đăng xuất ");
         System.out.println("******************************************************************************");
 
     }

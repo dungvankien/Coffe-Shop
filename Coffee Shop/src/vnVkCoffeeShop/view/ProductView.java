@@ -42,11 +42,11 @@ public class ProductView {
                     printProductView();
                     break;
                 case "0":
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
             }
 
         } while (!choice.equals("0"));
@@ -68,7 +68,7 @@ public class ProductView {
                     break;
                 } catch (Exception e) {
                     System.out.println("Nhập sai định dang cần nhập lại");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             do {
@@ -78,16 +78,16 @@ public class ProductView {
                     break;
                 } catch (Exception e) {
                     System.out.println("Nhập sai định dang cần nhập lại");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
             Product product = new Product(idProduct, nameProduct, quantity, price);
             productService.add(product);
             System.out.println("Sản phẩm đã được thêm vào danh sách");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         } else {
             System.out.println("ID đã có trong danh sách sản phẩm: ");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
 
     }
@@ -103,7 +103,7 @@ public class ProductView {
                 String number = input.nextLine();
                 String value = "";
                 if (number.equals("0")) {
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 }
                 if (number.equals("1") || number.equals("2") || number.equals("3") || number.equals("4")) {
@@ -120,7 +120,7 @@ public class ProductView {
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Nhập sai định dạng cần nhập lại");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
@@ -133,22 +133,22 @@ public class ProductView {
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Nhập sai định dạng cần nhập lại");
-                                Menu.getMenuYesNo();
+                                Menu.getMenuReturn();
                             }
                         } while (true);
                     }
                     productService.edit(productEdit, number, value);
                     System.out.println("Giá trị đã được thay đổi.");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                     break;
                 } else {
                     System.out.println("Nhập không đúng giá trị");
-                    Menu.getMenuYesNo();
+                    Menu.getMenuReturn();
                 }
             } while (true);
         } else {
             System.out.println("ID không có trong danh sách sản phẩm");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 
@@ -157,12 +157,16 @@ public class ProductView {
         String idProductRemove = input.nextLine();
         Product productRemove = new Product(idProductRemove);
         if (productService.find(productRemove)) {
-            productService.remove(productRemove);
-            System.out.println("Đã xóa sản phẩm có: " + idProductRemove);
-            Menu.getMenuYesNo();
+            if(Menu.getMenuYesNo()){
+                productService.remove(productRemove);
+                System.out.println("Đã xóa sản phẩm có: " + idProductRemove);
+                Menu.getMenuReturn();
+            }else {
+                return;
+            }
         } else {
             System.out.println("ID không có trong danh sách sản phẩm");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 
@@ -171,7 +175,7 @@ public class ProductView {
         System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                 "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
         productService.print();
-        Menu.getMenuYesNo();
+        Menu.getMenuReturn();
     }
 
     public void findProductView() {
@@ -182,10 +186,10 @@ public class ProductView {
             System.out.printf("%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                     "SỐ LƯỢNG", "GIÁ SẢN PHẨM");
             productService.printItemProduc(productFind);
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         } else {
             System.out.println("Sản ID không có trong danh sách sản phẩm");
-            Menu.getMenuYesNo();
+            Menu.getMenuReturn();
         }
     }
 }

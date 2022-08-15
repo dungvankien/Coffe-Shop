@@ -31,7 +31,7 @@ public class LoginUserView {
                 }
             } else {
                 System.out.println("Tài khoản không chính xác");
-                Menu.getMenuYesNo();
+                Menu.getMenuReturn();
                 flag = false;
             }
         } while (!flag);
