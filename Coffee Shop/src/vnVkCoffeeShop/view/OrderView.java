@@ -44,7 +44,6 @@ public class OrderView {
                     Menu.getMenuReturn();
                     break;
                 case "0":
-                    Menu.getMenuReturn();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");

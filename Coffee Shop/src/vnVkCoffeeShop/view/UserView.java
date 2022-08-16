@@ -69,7 +69,7 @@ public class UserView {
             } while (true);
             do {
                 System.out.println("Nhâp Email: ");
-                email = input.nextLine();
+                email = input.nextLine().toLowerCase();
                 if (ValidateUtils.isEmailVaild(email)) {
                     break;
                 } else {

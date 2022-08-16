@@ -26,7 +26,6 @@ public class AdminView {
                       orderView.workOFOrder();
                     break;
                 case "0":
-                    Menu.getMenuReturn();
                     break;
                 default:
                     System.out.println("Vui lòng chọn đúng chức năng");
