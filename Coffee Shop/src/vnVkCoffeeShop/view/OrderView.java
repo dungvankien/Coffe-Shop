@@ -128,7 +128,8 @@ public class OrderView {
         System.out.printf("\n%-15s %-25s %-20s %-15s\n", "ID SẢN PHẨM", "TÊN SẢN PHẨM",
                 "SỐ LƯỢNG", "GIÁ SẢN PHẨM\n");
         orderService.printItemOrder(order);
-        System.out.println("\n=================>>>>>>>>>>>>>>>>>>>>Tổng số tiền cần trả: " + orderService.sumPriceOrder(order) + "<<<<<<<<<<<<<===========\n");
+        System.out.println("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Tổng số tiền cần trả: " + orderService.sumPriceOrder(order));
+        System.out.println("\n-------------------------------------------------------------------------------------------------");
     }
 
     public void removerOrderView(String idOrder) {
