@@ -65,9 +65,12 @@ public class ProductView {
                 try {
                     System.out.println("Nhập tổng số lượng sản phẩm: ");
                     quantity = Integer.parseInt(input.nextLine());
+                    if (quantity < 0) {
+                        throw new RuntimeException();
+                    }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Nhập sai định dang cần nhập lại");
+                    System.out.println("Nhập sai cần nhập lại");
                     Menu.getMenuReturn();
                 }
             } while (true);
@@ -75,9 +78,12 @@ public class ProductView {
                 try {
                     System.out.println("Nhập giá sản phẩm: ");
                     price = Double.parseDouble(input.nextLine());
+                    if (price <= 0) {
+                        throw new RuntimeException();
+                    }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Nhập sai định dang cần nhập lại");
+                    System.out.println("Nhập sai cần nhập lại");
                     Menu.getMenuReturn();
                 }
             } while (true);
@@ -117,6 +123,9 @@ public class ProductView {
                                 System.out.println("Nhập giá trị cần thay đổi: ");
                                 value = input.nextLine();
                                 Integer.parseInt(value);
+                                if(Integer.parseInt(value)<0){
+                                    throw new RuntimeException();
+                                }
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Nhập sai định dạng cần nhập lại");
@@ -130,6 +139,9 @@ public class ProductView {
                                 System.out.println("Nhập giá trị cần thay đổi: ");
                                 value = input.nextLine();
                                 Double.parseDouble(value);
+                                if(Double.parseDouble(value)<=0){
+                                    throw new RuntimeException();
+                                }
                                 break;
                             } catch (Exception e) {
                                 System.out.println("Nhập sai định dạng cần nhập lại");
@@ -157,11 +169,11 @@ public class ProductView {
         String idProductRemove = input.nextLine();
         Product productRemove = new Product(idProductRemove);
         if (productService.find(productRemove)) {
-            if(Menu.getMenuYesNo()){
+            if (Menu.getMenuYesNo()) {
                 productService.remove(productRemove);
                 System.out.println("Đã xóa sản phẩm có: " + idProductRemove);
                 Menu.getMenuReturn();
-            }else {
+            } else {
                 return;
             }
         } else {

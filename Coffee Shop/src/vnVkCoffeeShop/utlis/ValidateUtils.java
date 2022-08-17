@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class ValidateUtils {
     public static final String PASSWORD_REGEX = "^[A-Za-z0-9@&]{8,}$";
-    public static final String USERNAME_REGEX = "^[a-z][a-z0-9_]{4,12}$";
+    public static final String USERNAME_REGEX = "^[a-z][a-z0-9_]{3,12}$";
     public static final String PHONE_REGEX = "^[0][1-9]\\d{8}$";
     public static final String EMAIL_REGRX = "^[a-z]+[a-z0-9]*@[a-z]+\\.[a-z]{2,3}$";
 
