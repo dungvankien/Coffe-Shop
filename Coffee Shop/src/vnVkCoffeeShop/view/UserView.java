@@ -50,13 +50,28 @@ public class UserView {
         String email;
         String username;
         String password;
+        String idEmployee;
+        String fullName;
+        String address;
         Role role;
-        System.out.println("Nhâp ID User: ");
-        String idEmployee = input.nextLine();
+        do {
+            System.out.println("Nhâp ID User: ");
+            idEmployee = input.nextLine();
+            if (idEmployee.isEmpty()) {
+                System.out.println("Không được để trống ID");
+                Menu.getMenuReturn();
+            }
+        } while (idEmployee.isEmpty());
         User usercheck = new User(idEmployee);
         if (!userService.find(usercheck)) {
-            System.out.println("Nhập Họ và Tên User: ");
-            String fullName = input.nextLine();
+            do {
+                System.out.println("Nhập Họ và Tên User: ");
+                fullName = input.nextLine().trim();
+                if (fullName.isEmpty()) {
+                    System.out.println("Không được để trống tên User:");
+                    Menu.getMenuReturn();
+                }
+            } while (fullName.isEmpty());
             do {
                 System.out.println("Nhập số điện thoại: ");
                 phoneNumber = input.nextLine();
@@ -77,8 +92,15 @@ public class UserView {
                     Menu.getMenuReturn();
                 }
             } while (true);
-            System.out.println("Nhập địa chỉ: ");
-            String address = input.nextLine();
+            do{
+                System.out.println("Nhập địa chỉ: ");
+                address = input.nextLine().trim();
+                if(address.isEmpty()){
+                    System.out.println("Không được để trông địa chỉ");
+                    Menu.getMenuReturn();
+                }
+            }while (address.isEmpty());
+
             do {
                 try {
                     System.out.println("Nhập phân quyền sử dụng:");
@@ -207,11 +229,11 @@ public class UserView {
         String idUserRemove = input.nextLine();
         User userRemove = new User(idUserRemove);
         if (userService.find(userRemove)) {
-            if(Menu.getMenuYesNo()){
+            if (Menu.getMenuYesNo()) {
                 userService.remove(userRemove);
                 System.out.println("Đã xóa User có ID :" + idUserRemove);
                 Menu.getMenuReturn();
-            }else {
+            } else {
                 return;
             }
         } else {

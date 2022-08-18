@@ -53,12 +53,26 @@ public class ProductView {
     }
 
     public void addProductView() {
-        System.out.println("Nhập ID sản phẩm: ");
-        String idProduct = input.nextLine();
+        String idProduct;
+        String nameProduct;
+        do {
+            System.out.println("Nhập ID sản phẩm: ");
+            idProduct = input.nextLine().trim();
+            if (idProduct.isEmpty()) {
+                System.out.println("Không được để trống ID Sản phẩm");
+                Menu.getMenuReturn();
+            }
+        } while (idProduct.isEmpty());
         Product productCheck = new Product(idProduct);
         if (!productService.find(productCheck)) {
-            System.out.println("Nhập tên sản phẩm: ");
-            String nameProduct = input.nextLine();
+            do {
+                System.out.println("Nhập tên sản phẩm: ");
+                nameProduct = input.nextLine().trim();
+                if (nameProduct.isEmpty()) {
+                    System.out.println("Không được để trống tên Sản phẩm");
+                    Menu.getMenuReturn();
+                }
+            } while (nameProduct.isEmpty());
             double price = 0;
             int quantity;
             do {
@@ -114,6 +128,14 @@ public class ProductView {
                 }
                 if (number.equals("1") || number.equals("2") || number.equals("3") || number.equals("4")) {
                     if (number.equals("1") || number.equals("2")) {
+                        do{
+                            System.out.println("Nhập giá trị cần thay đổi: ");
+                            value = input.nextLine().trim();
+                            if(value.isEmpty()){
+                                System.out.println("Không được để trống:");
+                                Menu.getMenuReturn();
+                            }
+                        }while (value.isEmpty());
                         System.out.println("Nhập giá trị cần thay đổi: ");
                         value = input.nextLine();
                     }
@@ -123,7 +145,7 @@ public class ProductView {
                                 System.out.println("Nhập giá trị cần thay đổi: ");
                                 value = input.nextLine();
                                 Integer.parseInt(value);
-                                if(Integer.parseInt(value)<0){
+                                if (Integer.parseInt(value) < 0) {
                                     throw new RuntimeException();
                                 }
                                 break;
@@ -139,7 +161,7 @@ public class ProductView {
                                 System.out.println("Nhập giá trị cần thay đổi: ");
                                 value = input.nextLine();
                                 Double.parseDouble(value);
-                                if(Double.parseDouble(value)<=0){
+                                if (Double.parseDouble(value) <= 0) {
                                     throw new RuntimeException();
                                 }
                                 break;

@@ -69,6 +69,9 @@ public class OrderView {
                     try {
                         System.out.println("Nhập số lượng cần mua");
                         amount = Integer.parseInt(input.nextLine());
+                        if (amount <= 0) {
+                            throw new RuntimeException();
+                        }
                         if (productService.getQuality(product) >= amount && productService.getQuality(product) > 0) {
                             productService.subtractAddition(product, -amount);
                             flag = false;
@@ -83,6 +86,7 @@ public class OrderView {
                         }
                     } catch (Exception e) {
                         System.out.println("Nhập đúng số lượng cần mua");
+                        Menu.getMenuReturn();
                         flag = true;
                     }
                 } while (flag);
@@ -150,7 +154,7 @@ public class OrderView {
                         System.out.println(" Đã xóa Order có ID: " + idOrder);
                         break;
                     } else {
-                       break;
+                        break;
                     }
                 } else {
                     System.out.println("ID Order không tồn tại:");
